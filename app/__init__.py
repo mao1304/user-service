@@ -14,8 +14,8 @@ api = Api(app)
 # registro de los modelos en el app.
 from app.models.user import AdministradorModel
 
-from app.views.user_views import user_routes
+from app.views.user_views import domiciliario_ns
 from app.views.admin_view import administrador_ns
 #registro de rutas
-api.add_namespace(user_routes, path='/api/v1/users')
+api.add_namespace(domiciliario_ns, path='/api/v1/users')
 api.add_namespace(administrador_ns, path='/api/v1/admin')
