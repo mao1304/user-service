@@ -1,5 +1,5 @@
 from flask_restx import Namespace, Resource, fields
-# from app import db
+from app import db
 from app.models.user import AdministradorModel
 
 administrador_ns = Namespace('administradores', description='Operaciones CRUD para administradores')

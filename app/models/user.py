@@ -18,6 +18,10 @@ from app import db
 from sqlalchemy.orm import relationship
 
 # Modelo de Administrador
+from app import db
+from sqlalchemy.orm import relationship
+
+# Modelo de Administrador
 class AdministradorModel(db.Model):
     __tablename__ = 'administradores'
     id = db.Column(db.Integer, primary_key=True)
@@ -25,9 +29,8 @@ class AdministradorModel(db.Model):
     contraseña = db.Column(db.String(100), nullable=False)
     correo = db.Column(db.String(100), nullable=False, unique=True)
     compania = db.Column(db.String(100), nullable=False)
-
     # Relación con Domiciliario
-    domiciliarios = relationship('Domiciliario', backref='administrador', lazy=True)
+    domiciliarios = relationship('DomiciliarioModel', backref='administrador', lazy=True)
 
 # Modelo de Domiciliario
 class DomiciliarioModel(db.Model):
@@ -39,9 +42,8 @@ class DomiciliarioModel(db.Model):
     telefono = db.Column(db.String(20), nullable=False)
     estado = db.Column(db.String(50), nullable=False)
     administrador_id = db.Column(db.Integer, db.ForeignKey('administradores.id'), nullable=False)
-
     # Relación con Vehiculo
-    vehiculos = relationship('Vehiculo', backref='domiciliario', lazy=True)
+    vehiculos = relationship('VehiculoModel', backref='domiciliario', lazy=True)
 
 # Modelo de Vehiculo
 class VehiculoModel(db.Model):
@@ -59,9 +61,8 @@ class ClienteModel(db.Model):
     nombre = db.Column(db.String(50), nullable=False)
     usuario = db.Column(db.String(50), unique=True, nullable=False)
     contraseña = db.Column(db.String(100), nullable=False)
-
     # Relación con Pedido
-    pedidos = relationship('Pedido', backref='cliente', lazy=True)
+    pedidos = relationship('PedidoModel', backref='cliente', lazy=True)
 
 # Modelo de Pedido
 class PedidoModel(db.Model):
@@ -73,3 +74,4 @@ class PedidoModel(db.Model):
     distancia = db.Column(db.Float, nullable=False)
     cliente_id = db.Column(db.Integer, db.ForeignKey('clientes.id'), nullable=False)
     domiciliario_id = db.Column(db.Integer, db.ForeignKey('domiciliarios.id'), nullable=False)
+
